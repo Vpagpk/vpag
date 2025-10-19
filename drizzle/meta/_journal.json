@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1760714699778,
+      "tag": "0000_wise_excalibur",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1760714803794,
+      "tag": "0001_clever_red_hulk",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1760742397099,
+      "tag": "0002_needy_bruce_banner",
+      "breakpoints": true
+    }
+  ]
+}
