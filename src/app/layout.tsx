@@ -4,6 +4,8 @@ import VisualEditsMessenger from "../visual-edits/VisualEditsMessenger";
 import ErrorReporter from "@/components/ErrorReporter";
 import Script from "next/script";
 import { Toaster } from "@/components/ui/sonner";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: {
@@ -60,7 +62,7 @@ export default function RootLayout({
       <body className="antialiased">
         <ErrorReporter />
         <Script
-          src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/scripts//route-messenger.js"
+          src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/scripts/route-messenger.js"
           strategy="afterInteractive"
           data-target-origin="*"
           data-message-type="ROUTE_CHANGE"
@@ -72,6 +74,8 @@ export default function RootLayout({
         {children}
         <Toaster />
         <VisualEditsMessenger />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

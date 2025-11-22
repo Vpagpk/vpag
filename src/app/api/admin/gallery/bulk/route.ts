@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
 
     if (!validation.success) {
       return NextResponse.json(
-        { error: validation.error.errors[0].message },
+        { error: validation.error.issues[0].message },
         { status: 400 }
       );
     }
@@ -58,19 +58,19 @@ export async function POST(request: NextRequest) {
         .delete(galleryPhotos)
         .where(inArray(galleryPhotos.id, ids))
         .returning();
-      
+
       auditAction = 'bulk_delete';
     } else {
       const isVisible = action === 'show';
       result = await db
         .update(galleryPhotos)
-        .set({ 
+        .set({
           isVisible,
           updatedAt: new Date().toISOString()
         })
         .where(inArray(galleryPhotos.id, ids))
         .returning();
-      
+
       auditAction = 'bulk_update';
     }
 

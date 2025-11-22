@@ -24,7 +24,7 @@ export default function BlobUploader({ onUploadComplete }: BlobUploaderProps) {
   const [files, setFiles] = useState<UploadFile[]>([]);
   const [isDragging, setIsDragging] = useState(false);
 
-  const validateFile = (file: File): string | null => {
+  const validateFile = (file: File): string | undefined => {
     // Check file type
     if (file.type !== "image/webp") {
       return "Only WebP images are allowed. Please convert your image to WebP format.";
@@ -35,19 +35,19 @@ export default function BlobUploader({ onUploadComplete }: BlobUploaderProps) {
       return "File size must be less than 5MB";
     }
 
-    return null;
+    return undefined;
   };
 
   const handleFiles = useCallback((newFiles: FileList | File[]) => {
     const fileArray = Array.from(newFiles);
-    
+
     const validatedFiles: UploadFile[] = fileArray.map((file) => {
       const error = validateFile(file);
       return {
         file,
         preview: URL.createObjectURL(file),
         status: error ? ("error" as const) : ("pending" as const),
-        error,
+        error: error || undefined,
       };
     });
 
@@ -181,8 +181,8 @@ export default function BlobUploader({ onUploadComplete }: BlobUploaderProps) {
         onDragLeave={handleDragLeave}
         className={`
           relative border-2 border-dashed rounded-2xl p-12 text-center transition-all
-          ${isDragging 
-            ? "border-primary bg-primary/5" 
+          ${isDragging
+            ? "border-primary bg-primary/5"
             : "border-zinc-700 hover:border-zinc-600 bg-zinc-900/50"
           }
         `}
@@ -195,7 +195,7 @@ export default function BlobUploader({ onUploadComplete }: BlobUploaderProps) {
           onChange={handleFileInput}
           className="hidden"
         />
-        
+
         <div className="flex flex-col items-center space-y-4">
           <div className="p-4 rounded-full bg-zinc-800">
             <Upload className="w-8 h-8 text-zinc-400" />
@@ -264,7 +264,7 @@ export default function BlobUploader({ onUploadComplete }: BlobUploaderProps) {
                   fill
                   className="object-cover"
                 />
-                
+
                 {/* Status Overlay */}
                 <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center">
                   {fileData.status === "pending" && (
@@ -277,21 +277,21 @@ export default function BlobUploader({ onUploadComplete }: BlobUploaderProps) {
                       Upload
                     </Button>
                   )}
-                  
+
                   {fileData.status === "uploading" && (
                     <div className="text-center">
                       <Loader2 className="w-8 h-8 text-primary animate-spin mx-auto mb-2" />
                       <p className="text-xs text-white">{fileData.progress}%</p>
                     </div>
                   )}
-                  
+
                   {fileData.status === "success" && (
                     <div className="text-center">
                       <CheckCircle2 className="w-8 h-8 text-green-500 mx-auto mb-2" />
                       <p className="text-xs text-white">Uploaded</p>
                     </div>
                   )}
-                  
+
                   {fileData.status === "error" && (
                     <div className="text-center px-2">
                       <FileWarning className="w-8 h-8 text-red-500 mx-auto mb-2" />

@@ -8,15 +8,15 @@ import { z } from 'zod';
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    
+
     const limit = Math.min(parseInt(searchParams.get('limit') || '100'), 100);
     const offset = parseInt(searchParams.get('offset') || '0');
     const isVisible = searchParams.get('isVisible');
     const category = searchParams.get('category');
 
-    let query = db.select().from(galleryPhotos);
+    let query = db.select().from(galleryPhotos).$dynamic();
 
-    const conditions = [];
+    const conditions: any[] = [];
 
     if (isVisible !== null) {
       const visibleValue = isVisible === 'true';
@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
     }
 
     if (conditions.length > 0) {
-      query = query.where(and(...conditions));
+      query = query.where(and(...conditions) as any);
     }
 
     const results = await query
@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
       .limit(limit)
       .offset(offset);
 
-    return NextResponse.json(results, { 
+    return NextResponse.json(results, {
       status: 200,
       headers: {
         'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=120',
@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
   try {
     // Get bearer token for authentication
     const bearerToken = request.headers.get('authorization')?.replace('Bearer ', '');
-    
+
     if (!bearerToken) {
       return NextResponse.json(
         { error: 'Unauthorized - No token provided' },
@@ -80,7 +80,7 @@ export async function POST(request: NextRequest) {
 
     if (!validation.success) {
       return NextResponse.json(
-        { error: validation.error.errors[0].message },
+        { error: validation.error.issues[0].message },
         { status: 400 }
       );
     }

@@ -5,43 +5,14 @@ import { eq } from 'drizzle-orm';
 import { revalidateTag } from 'next/cache';
 import { z } from 'zod';
 
-// Helper function to get current user from request
-async function getCurrentUser(request: NextRequest) {
-  try {
-    const cookieToken = request.cookies.get('better-auth.session_token')?.value;
-    const bearerToken = request.headers.get('authorization')?.replace('Bearer ', '');
-    const token = cookieToken || bearerToken;
-    
-    if (!token) return null;
-
-    const sessionData = await db
-      .select()
-      .from(session)
-      .where(eq(session.token, token))
-      .limit(1);
-
-    if (!sessionData || sessionData.length === 0 || sessionData[0].expiresAt < new Date()) {
-      return null;
-    }
-
-    const userData = await db
-      .select()
-      .from(user)
-      .where(eq(user.id, sessionData[0].userId))
-      .limit(1);
-
-    return userData && userData.length > 0 ? userData[0] : null;
-  } catch (error) {
-    return null;
-  }
-}
+import { getCurrentUser } from '@/lib/auth';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = params.id;
+    const { id } = await params;
 
     if (!id || isNaN(parseInt(id))) {
       return NextResponse.json(
@@ -87,7 +58,7 @@ const updatePhotoSchema = z.object({
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Check authentication
@@ -99,7 +70,7 @@ export async function PATCH(
       );
     }
 
-    const id = params.id;
+    const { id } = await params;
 
     if (!id || isNaN(parseInt(id))) {
       return NextResponse.json(
@@ -113,7 +84,7 @@ export async function PATCH(
 
     if (!validation.success) {
       return NextResponse.json(
-        { error: validation.error.errors[0].message },
+        { error: validation.error.issues[0].message },
         { status: 400 }
       );
     }
@@ -167,7 +138,7 @@ export async function PATCH(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Check authentication
@@ -179,7 +150,7 @@ export async function DELETE(
       );
     }
 
-    const id = params.id;
+    const { id } = await params;
 
     if (!id || isNaN(parseInt(id))) {
       return NextResponse.json(

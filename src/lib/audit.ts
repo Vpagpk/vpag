@@ -15,10 +15,10 @@ export interface AuditLogOptions {
 
 export async function createAuditLog(options: AuditLogOptions) {
   const { userId, action, resourceType, resourceId, details, request } = options;
-  
-  const ipAddress = request?.ip || request?.headers.get('x-forwarded-for') || request?.headers.get('x-real-ip') || 'unknown';
+
+  const ipAddress = request?.headers.get('x-forwarded-for') || request?.headers.get('x-real-ip') || 'unknown';
   const userAgent = request?.headers.get('user-agent') || 'unknown';
-  
+
   try {
     await db.insert(auditLogs).values({
       userId,

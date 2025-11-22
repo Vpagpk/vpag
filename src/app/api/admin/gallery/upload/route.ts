@@ -12,11 +12,6 @@ const limiter = rateLimit({
 
 const uploadSchema = z.object({
   filename: z.string().min(1).max(255),
-  contentType: z.string().refine(
-    (type) => type === 'image/webp',
-    { message: 'Only WebP images are allowed' }
-  ),
-  size: z.number().max(5 * 1024 * 1024, 'File size must be less than 5MB'),
 });
 
 export async function POST(request: NextRequest) {
@@ -35,7 +30,7 @@ export async function POST(request: NextRequest) {
     if (!rateCheck.success) {
       return NextResponse.json(
         { error: 'Too many requests', resetAt: rateCheck.reset },
-        { 
+        {
           status: 429,
           headers: {
             'X-RateLimit-Limit': rateCheck.limit.toString(),
@@ -48,16 +43,22 @@ export async function POST(request: NextRequest) {
 
     const body = (await request.json()) as HandleUploadBody;
 
+    // Type guard to check if payload has pathname (client upload request)
+    if (!body.payload || !('pathname' in body.payload)) {
+      return NextResponse.json(
+        { error: 'Invalid upload request' },
+        { status: 400 }
+      );
+    }
+
     // Validate upload request
     const validation = uploadSchema.safeParse({
-      filename: body.payload?.pathname || '',
-      contentType: body.payload?.contentType || '',
-      size: body.payload?.size || 0,
+      filename: body.payload.pathname || '',
     });
 
     if (!validation.success) {
       return NextResponse.json(
-        { error: validation.error.errors[0].message },
+        { error: validation.error.issues[0].message },
         { status: 400 }
       );
     }

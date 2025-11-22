@@ -7,12 +7,12 @@ import { cn } from '@/lib/utils';
 
 export default function Breadcrumbs() {
   const pathname = usePathname();
-  
+
   // Don't show on homepage
   if (pathname === '/') return null;
-  
+
   const pathSegments = pathname.split('/').filter(segment => segment);
-  
+
   const breadcrumbItems = [
     { label: 'Home', href: '/', icon: Home },
     ...pathSegments.map((segment, index) => {
@@ -21,25 +21,25 @@ export default function Breadcrumbs() {
         .split('-')
         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
         .join(' ');
-      
+
       return { label, href };
     })
   ];
-  
+
   return (
     <nav aria-label="Breadcrumb" className="mb-8">
       <ol className="flex flex-wrap items-center gap-2 text-sm">
         {breadcrumbItems.map((item, index) => {
           const isLast = index === breadcrumbItems.length - 1;
-          const Icon = item.icon;
-          
+          const Icon = 'icon' in item ? item.icon : undefined;
+
           return (
             <li key={item.href} className="flex items-center gap-2">
               {index > 0 && (
                 <ChevronRight className="w-4 h-4 text-zinc-600" aria-hidden="true" />
               )}
               {isLast ? (
-                <span 
+                <span
                   className="text-primary font-medium flex items-center gap-1.5"
                   aria-current="page"
                 >
