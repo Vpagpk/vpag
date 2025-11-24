@@ -5,6 +5,11 @@ import VideoGallery from '@/components/sections/video-gallery';
 import Image from 'next/image';
 import { Image as ImageIcon, Video, Loader2 } from 'lucide-react';
 
+// Force dynamic rendering to prevent build timeout
+export const dynamic = 'force-dynamic';
+export const revalidate = 60; // Revalidate every 60 seconds
+
+
 interface GalleryPhoto {
   id: number;
   title: string;
@@ -21,12 +26,12 @@ async function getPhotos(): Promise<GalleryPhoto[]> {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
     const response = await fetch(`${baseUrl}/api/gallery-photos?isVisible=true`, {
-      next: { 
+      next: {
         revalidate: 60,
         tags: ['gallery']
       }
     });
-    
+
     if (!response.ok) return [];
     return response.json();
   } catch (error) {
@@ -41,7 +46,7 @@ export default async function GalleryPage() {
   return (
     <div className="min-h-screen bg-zinc-950">
       <Navigation />
-      
+
       <main className="pt-24">
         {/* Hero Section */}
         <section className="relative py-20 overflow-hidden">
@@ -131,7 +136,7 @@ export default async function GalleryPage() {
           </div>
         </section>
       </main>
-      
+
       <Footer />
     </div>
   );

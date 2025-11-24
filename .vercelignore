@@ -1,0 +1,35 @@
+# Ignore files that don't need to be deployed to Vercel
+# This reduces deployment size and speeds up builds
+
+# Development files
+.env.local
+.env.development
+.env.test
+
+# Documentation (already in repo, no need to upload again)
+*.md
+!README.md
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Test files
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+__tests__/
+coverage/
+
+# Local development
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+.gitattributes
