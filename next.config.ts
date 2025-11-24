@@ -4,6 +4,9 @@ import path from "node:path";
 const LOADER = path.resolve(__dirname, 'src/visual-edits/component-tagger-loader.js');
 
 const nextConfig: NextConfig = {
+  // Optimize for Vercel deployment
+  output: 'standalone',
+
   async headers() {
     return [
       {
@@ -77,7 +80,7 @@ const nextConfig: NextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
   experimental: {
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
+    optimizePackageImports: ['lucide-react', 'framer-motion', '@radix-ui/react-icons'],
   },
   // Only use turbopack in development
   ...(process.env.NODE_ENV === 'development' && {
