@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Loader2, UserPlus, ArrowLeft } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -71,6 +72,17 @@ export default function SignUpPage() {
     }
   };
 
+  const handleGitHubSignUp = async () => {
+    try {
+      await authClient.signIn.social({
+        provider: "github",
+        callbackURL: "/admin",
+      });
+    } catch (error) {
+      toast.error("Failed to sign up with GitHub. Please try again.");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-zinc-950 flex items-center justify-center px-4 py-12 relative overflow-hidden">
       {/* Animated Background */}
@@ -107,6 +119,27 @@ export default function SignUpPage() {
               Create <span className="text-primary">Admin Account</span>
             </h1>
             <p className="text-zinc-400">Join the VPAG management team</p>
+          </div>
+
+          {/* GitHub OAuth Button */}
+          <Button
+            type="button"
+            onClick={handleGitHubSignUp}
+            variant="outline"
+            className="w-full bg-zinc-800 hover:bg-zinc-700 border-zinc-700 text-white h-12 text-base"
+          >
+            <FaGithub className="w-5 h-5 mr-2" />
+            Sign up with GitHub
+          </Button>
+
+          {/* Divider */}
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-zinc-700" />
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-4 bg-zinc-900 text-zinc-400">Or continue with email</span>
+            </div>
           </div>
 
           <form onSubmit={handleSignUp} className="space-y-6">

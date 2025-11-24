@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Loader2, LogIn, ArrowLeft } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
 
 export default function SignInPage() {
   const router = useRouter();
@@ -43,6 +44,17 @@ export default function SignInPage() {
     } catch (error) {
       toast.error("An error occurred. Please try again.");
       setIsLoading(false);
+    }
+  };
+
+  const handleGitHubSignIn = async () => {
+    try {
+      await authClient.signIn.social({
+        provider: "github",
+        callbackURL: "/admin",
+      });
+    } catch (error) {
+      toast.error("Failed to sign in with GitHub. Please try again.");
     }
   };
 
@@ -84,6 +96,27 @@ export default function SignInPage() {
             <p className="text-zinc-400">
               Access your gallery management dashboard
             </p>
+          </div>
+
+          {/* GitHub OAuth Button */}
+          <Button
+            type="button"
+            onClick={handleGitHubSignIn}
+            variant="outline"
+            className="w-full bg-zinc-800 hover:bg-zinc-700 border-zinc-700 text-white h-12 text-base"
+          >
+            <FaGithub className="w-5 h-5 mr-2" />
+            Sign in with GitHub
+          </Button>
+
+          {/* Divider */}
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-zinc-700" />
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-4 bg-zinc-900 text-zinc-400">Or continue with email</span>
+            </div>
           </div>
 
           <form onSubmit={handleSignIn} className="space-y-6">
