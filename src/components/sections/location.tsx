@@ -8,7 +8,7 @@ const LocationSection = () => {
         <div className="absolute top-0 left-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl animate-float"></div>
         <div className="absolute bottom-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl animate-float-delayed"></div>
       </div>
-      
+
       <div className="container relative z-10">
         <div className="mx-auto max-w-4xl text-center mb-12 animate-fade-in">
           <h2 className="mb-4 text-4xl font-bold tracking-tight text-white md:text-5xl">
@@ -36,7 +36,7 @@ const LocationSection = () => {
           <div className="mx-auto max-w-5xl animate-fade-in animate-delay-300">
             <div className="relative w-full h-[500px] rounded-2xl overflow-hidden shadow-2xl border border-border">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7050398.57309783!2d68.9966984!3d30.36295725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6078332b9bab122d%3A0x3431c7bc5df9f9ec!2sVPAG(Versatile%20Performing%20Art%20Group)%20vpag%20lahore!5e0!3m2!1sen!2s!4v1760912705745!5m2!1sen!2s"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7050398.57309783!2d68.9966984!3d30.36295725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6078332b9bab122d%3A0x3431c7bc5df9f9ec!2sVPAG(Versatile%20Performing%20Art%20Group)%20vpag%20lahore!5e0!3m2!1sen!2s!4v1763971504265!5m2!1sen!2s"
                 width="600"
                 height="450"
                 style={{ border: 0 }}
