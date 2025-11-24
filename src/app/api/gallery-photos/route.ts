@@ -4,6 +4,7 @@ import { galleryPhotos } from '@/db/schema';
 import { eq, and, desc, asc } from 'drizzle-orm';
 import { revalidateTag } from 'next/cache';
 import { z } from 'zod';
+import { getCurrentUser } from '@/lib/auth';
 
 export async function GET(request: NextRequest) {
   try {
@@ -65,12 +66,12 @@ const createPhotoSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
-    // Get bearer token for authentication
-    const bearerToken = request.headers.get('authorization')?.replace('Bearer ', '');
+    // Check authentication
+    const user = await getCurrentUser(request);
 
-    if (!bearerToken) {
+    if (!user || user.email !== process.env.ADMIN_EMAIL) {
       return NextResponse.json(
-        { error: 'Unauthorized - No token provided' },
+        { error: 'Unauthorized' },
         { status: 401 }
       );
     }

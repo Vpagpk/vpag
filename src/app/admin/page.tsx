@@ -67,7 +67,7 @@ interface UploadFile {
 export default function AdminDashboard() {
   const router = useRouter();
   const { data: session, isPending, refetch } = useSession();
-  
+
   const [photos, setPhotos] = useState<GalleryPhoto[]>([]);
   const [selectedPhotos, setSelectedPhotos] = useState<number[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -90,6 +90,11 @@ export default function AdminDashboard() {
   const fetchPhotos = async () => {
     try {
       const response = await fetch("/api/gallery-photos");
+      if (response.status === 401) {
+        toast.error("Unauthorized access");
+        router.push("/sign-in");
+        return;
+      }
       if (response.ok) {
         const data = await response.json();
         setPhotos(data);
@@ -122,7 +127,7 @@ export default function AdminDashboard() {
         canvas.width = img.width;
         canvas.height = img.height;
         ctx?.drawImage(img, 0, 0);
-        
+
         canvas.toBlob(
           (blob) => {
             if (blob) resolve(blob);
@@ -138,7 +143,7 @@ export default function AdminDashboard() {
     });
   };
 
-  const getImageDimensions = (file: File): Promise<{width: number; height: number}> => {
+  const getImageDimensions = (file: File): Promise<{ width: number; height: number }> => {
     return new Promise((resolve, reject) => {
       const img = document.createElement('img');
       img.onload = () => {
@@ -156,7 +161,7 @@ export default function AdminDashboard() {
     for (const file of acceptedFiles) {
       try {
         let processedFile: File | Blob = file;
-        
+
         if (file.type !== 'image/webp') {
           const webpBlob = await convertToWebP(file);
           processedFile = new File([webpBlob], file.name.replace(/\.[^/.]+$/, '.webp'), { type: 'image/webp' });
@@ -205,13 +210,13 @@ export default function AdminDashboard() {
 
   const handleUploadAll = async () => {
     if (uploadFiles.length === 0) return;
-    
+
     setIsUploading(true);
     const updatedFiles = [...uploadFiles];
 
     for (let i = 0; i < updatedFiles.length; i++) {
       const fileData = updatedFiles[i];
-      
+
       if (fileData.status !== 'pending') continue;
 
       updatedFiles[i].status = 'uploading';
@@ -390,11 +395,10 @@ export default function AdminDashboard() {
 
           <div
             {...getRootProps()}
-            className={`border-2 border-dashed rounded-xl p-12 text-center cursor-pointer transition-all ${
-              isDragActive
+            className={`border-2 border-dashed rounded-xl p-12 text-center cursor-pointer transition-all ${isDragActive
                 ? 'border-primary bg-primary/5'
                 : 'border-zinc-700 hover:border-zinc-600 bg-zinc-800/50'
-            }`}
+              }`}
           >
             <input {...getInputProps()} />
             <FileImage className="w-16 h-16 mx-auto mb-4 text-zinc-600" />
@@ -634,7 +638,7 @@ export default function AdminDashboard() {
                       </div>
                     )}
                   </div>
-                  
+
                   <div className="p-4">
                     <h3 className="text-white font-semibold mb-1 truncate">
                       {photo.title}
