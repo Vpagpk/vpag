@@ -2,6 +2,11 @@ import Image from 'next/image';
 
 const partners = [
   {
+    name: 'VPAG',
+    logo: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/663181b5-8337-4075-ab8c-a7be9fcca289-a558ba3c-1f21-45e6-ae1c-865779d39d5a-00-1mtjwxz4tb9hm-sisko-replit-dev/assets/images/next-852845-vpag-logo.png?',
+    alt: 'VPAG - Versatile Performing Art Group Logo',
+  },
+  {
     name: 'Pakistan Television',
     logo: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/663181b5-8337-4075-ab8c-a7be9fcca289-a558ba3c-1f21-45e6-ae1c-865779d39d5a-00-1mtjwxz4tb9hm-sisko-replit-dev/assets/images/next-409643-ptv.png?',
     alt: 'Pakistan Television Corporation logo',
@@ -68,23 +73,23 @@ const PartnersSection = () => {
 
         <div className="mt-12 grid grid-cols-1 items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {partners.map((partner, index) => (
-            <div 
-              key={partner.name} 
+            <div
+              key={partner.name}
               className="col-span-1 flex flex-col items-center text-center group animate-fade-in"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="relative w-full">
                 {/* Glow Effect */}
                 <div className="absolute -inset-3 bg-gradient-to-r from-primary/20 via-amber-500/20 to-primary/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
-                
+
                 {/* Card */}
                 <div className="relative flex h-32 w-full items-center justify-center rounded-2xl bg-gradient-to-br from-zinc-900/80 to-zinc-950/80 p-6 border border-zinc-800/80 transition-all duration-500 group-hover:border-primary/50 group-hover:shadow-xl group-hover:shadow-primary/20 hover:-translate-y-2 will-change-transform overflow-hidden">
                   {/* Top Border Accent */}
                   <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  
+
                   {/* Gradient Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  
+
                   <Image
                     src={partner.logo}
                     alt={partner.alt}
@@ -102,14 +107,14 @@ const PartnersSection = () => {
         <div className="mt-20 mb-8 border-t-2 border-primary/30 pt-12">
           <div className="grid grid-cols-1 gap-8 text-center md:grid-cols-3">
             {stats.map((stat, index) => (
-              <div 
-                key={stat.title} 
+              <div
+                key={stat.title}
                 className="relative group animate-fade-in"
                 style={{ animationDelay: `${600 + index * 100}ms` }}
               >
                 {/* Glow Effect */}
                 <div className="absolute inset-0 bg-primary/10 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-                
+
                 <div className="relative">
                   <div className="font-display text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-primary via-amber-400 to-primary group-hover:scale-110 transition-transform duration-500 inline-block">{stat.value}</div>
                   <h3 className="mt-3 text-lg md:text-xl font-bold text-white group-hover:text-primary transition-colors duration-300">{stat.title}</h3>
