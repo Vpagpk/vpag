@@ -1,16 +1,17 @@
 import React from 'react';
+import { siteConfig } from '@/lib/config';
 
 const statsData: { value: string; label: string }[] = [
   {
-    value: '22+',
+    value: siteConfig.stats.years,
     label: 'Years Excellence',
   },
   {
-    value: '1.1k+',
+    value: siteConfig.stats.clients,
     label: 'Happy Clients',
   },
   {
-    value: '1k+',
+    value: siteConfig.stats.performances,
     label: 'Performances',
   },
 ];

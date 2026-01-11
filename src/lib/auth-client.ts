@@ -21,7 +21,7 @@ export const authClient = createAuthClient({
 
 type SessionData = ReturnType<typeof authClient.useSession>
 
-export function useSession(): SessionData {
+export function useSession() {
    const [session, setSession] = useState<any>(null);
    const [isPending, setIsPending] = useState(true);
    const [isRefetching, setIsRefetching] = useState(false);

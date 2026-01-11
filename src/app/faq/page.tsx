@@ -2,6 +2,8 @@ import Navigation from '@/components/sections/navigation';
 import Footer from '@/components/sections/footer';
 import FaqSection from '@/components/sections/faq';
 import Breadcrumbs from '@/components/ui/breadcrumbs';
+import Link from 'next/link';
+import Image from 'next/image';
 import { HelpCircle, MessageCircle } from 'lucide-react';
 
 export const metadata = {
@@ -19,7 +21,7 @@ export default function FaqPage() {
   return (
     <div className="min-h-screen bg-zinc-950">
       <Navigation />
-      
+
       <main className="pt-24">
         {/* Hero Section */}
         <section className="relative py-20 overflow-hidden">
@@ -51,7 +53,7 @@ export default function FaqPage() {
         </section>
 
         <FaqSection />
-        
+
         {/* Still Have Questions CTA */}
         <section className="py-20 bg-gradient-to-b from-black to-zinc-950">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -59,7 +61,7 @@ export default function FaqPage() {
               {/* Decorative Elements */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" aria-hidden="true" />
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" aria-hidden="true" />
-              
+
               <div className="relative bg-gradient-to-br from-zinc-900 via-zinc-950 to-black border border-zinc-800 rounded-3xl p-8 md:p-12 lg:p-16 text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 border border-primary/30 mb-6">
                   <MessageCircle className="w-8 h-8 text-primary" aria-hidden="true" />
@@ -81,7 +83,7 @@ export default function FaqPage() {
           </div>
         </section>
       </main>
-      
+
       <Footer />
     </div>
   );

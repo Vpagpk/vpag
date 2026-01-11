@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { usePathname } from 'next/navigation';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -15,10 +16,13 @@ const navLinks = [
   { href: '/contact', label: 'Contact' },
 ];
 
+
+
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const activePath = '/';
+  const pathname = usePathname();
+  const activePath = pathname === '/' ? '/' : `/${pathname.split('/')[1]}`;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,8 +35,8 @@ const Navigation = () => {
   return (
     <header className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-700",
-      scrolled 
-        ? "backdrop-blur-2xl bg-black/60 border-b border-primary/20 shadow-[0_8px_32px_0_rgba(245,158,11,0.15)]" 
+      scrolled
+        ? "backdrop-blur-2xl bg-black/60 border-b border-primary/20 shadow-[0_8px_32px_0_rgba(245,158,11,0.15)]"
         : "backdrop-blur-md bg-black/40 border-b border-white/5"
     )}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -104,7 +108,7 @@ const Navigation = () => {
             </div>
           </button>
         </div>
-        
+
         <div id="mobile-menu" className={cn("overflow-hidden transition-all duration-700 ease-in-out md:hidden", isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0')} role="navigation" aria-label="Mobile navigation">
           {isOpen && (
             <nav className="flex flex-col space-y-2 border-t border-primary/10 pt-5 pb-5 bg-gradient-to-b from-zinc-900/50 to-black/50 backdrop-blur-sm rounded-b-2xl">

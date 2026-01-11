@@ -3,9 +3,11 @@
 import { MessageCircle, X } from "lucide-react";
 import { useState } from "react";
 
+import { siteConfig } from '@/lib/config';
+
 export const WhatsAppPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const whatsappNumber = "923009402878"; // Format: country code + number without +
+  const whatsappNumber = siteConfig.whatsapp; // Format: country code + number without +
   const message = "Hello! I'm interested in learning more about VPAG performances.";
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
@@ -22,7 +24,7 @@ export const WhatsAppPopup = () => {
         ) : (
           <MessageCircle className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" />
         )}
-        
+
         {/* Pulse Animation Ring */}
         <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-20"></span>
       </button>
@@ -73,7 +75,7 @@ export const WhatsAppPopup = () => {
             {/* Contact Info */}
             <div className="text-center pt-2 border-t border-zinc-800">
               <p className="text-zinc-500 text-xs">
-                📞 +92 300 9402878
+                📞 {siteConfig.phone}
               </p>
             </div>
           </div>

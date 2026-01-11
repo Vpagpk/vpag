@@ -5,6 +5,7 @@ import Footer from '@/components/sections/footer';
 import Breadcrumbs from '@/components/ui/breadcrumbs';
 import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
 import { useState } from 'react';
+import { siteConfig } from '@/lib/config';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -15,61 +16,61 @@ export default function ContactPage() {
     eventDate: '',
     message: ''
   });
-  
+
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
-    
+
     if (!formData.name.trim()) {
       newErrors.name = 'Full name is required';
     } else if (formData.name.trim().length < 2) {
       newErrors.name = 'Name must be at least 2 characters';
     }
-    
+
     if (!formData.email.trim()) {
       newErrors.email = 'Email address is required';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
     }
-    
+
     if (!formData.phone.trim()) {
       newErrors.phone = 'Phone number is required';
     } else if (!/^[\d\s\-\+\(\)]{10,}$/.test(formData.phone)) {
       newErrors.phone = 'Please enter a valid phone number';
     }
-    
+
     if (!formData.eventType) {
       newErrors.eventType = 'Please select an event type';
     }
-    
+
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required';
     } else if (formData.message.trim().length < 10) {
       newErrors.message = 'Message must be at least 10 characters';
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
-    
+
     setIsSubmitting(true);
-    
+
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1500));
-    
+
     setIsSubmitting(false);
     setSubmitSuccess(true);
-    
+
     // Reset form after 3 seconds
     setTimeout(() => {
       setFormData({
@@ -90,7 +91,7 @@ export default function ContactPage() {
       ...formData,
       [name]: value
     });
-    
+
     // Clear error for this field when user starts typing
     if (errors[name]) {
       setErrors({
@@ -103,7 +104,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-zinc-950">
       <Navigation />
-      
+
       <main className="pt-24">
         {/* Hero Section */}
         <section className="relative py-20 overflow-hidden">
@@ -128,7 +129,7 @@ export default function ContactPage() {
                 Get in <span className="text-primary">Touch</span>
               </h1>
               <p className="text-xl md:text-2xl text-zinc-300 max-w-3xl mx-auto leading-relaxed animate-slide-up animate-delay-200">
-                Ready to book a performance or have questions? We'd love to hear from you
+                Ready to book a performance or have questions? We'd love to hear from you. We typically respond within 24 hours.
               </p>
             </div>
           </div>
@@ -170,8 +171,7 @@ export default function ContactPage() {
                     <div>
                       <h3 className="font-bold text-white text-lg mb-2">Phone</h3>
                       <p className="text-zinc-300 leading-relaxed">
-                        <a href="tel:+923001234567" className="hover:text-primary transition-colors">+92 (300) 123-4567</a><br />
-                        <a href="tel:+923219876543" className="hover:text-primary transition-colors">+92 (321) 987-6543</a>
+                        <a href={siteConfig.phoneHref} className="hover:text-primary transition-colors">{siteConfig.phone}</a>
                       </p>
                     </div>
                   </div>
@@ -183,8 +183,7 @@ export default function ContactPage() {
                     <div>
                       <h3 className="font-bold text-white text-lg mb-2">Email</h3>
                       <p className="text-zinc-300 leading-relaxed">
-                        <a href="mailto:info@vpag.com.pk" className="hover:text-primary transition-colors">info@vpag.com.pk</a><br />
-                        <a href="mailto:bookings@vpag.com.pk" className="hover:text-primary transition-colors">bookings@vpag.com.pk</a>
+                        <a href={`mailto:${siteConfig.email}`} className="hover:text-primary transition-colors">{siteConfig.email}</a>
                       </p>
                     </div>
                   </div>
@@ -209,7 +208,7 @@ export default function ContactPage() {
                 <div className="relative overflow-hidden bg-gradient-to-br from-zinc-900 via-zinc-950 to-black border border-zinc-800 rounded-3xl p-8 lg:p-12">
                   {/* Decorative Elements */}
                   <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" aria-hidden="true" />
-                  
+
                   <div className="relative z-10">
                     <h2 className="text-3xl lg:text-4xl font-bold mb-4">
                       Book Your <span className="text-primary">Performance</span>
@@ -393,19 +392,19 @@ export default function ContactPage() {
                 Located in Lahore, Punjab - Pakistan's Cultural Capital
               </p>
             </div>
-            
+
             <div className="max-w-4xl mx-auto relative overflow-hidden bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800 rounded-3xl p-12 text-center">
               {/* Decorative Elements */}
               <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 rounded-full blur-3xl" aria-hidden="true" />
               <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary/5 rounded-full blur-3xl" aria-hidden="true" />
-              
+
               <div className="relative z-10">
                 <div className="inline-flex items-center justify-center w-20 h-20 bg-primary/20 rounded-2xl mb-6 border border-primary/30" aria-hidden="true">
                   <MapPin className="w-10 h-10 text-primary" />
                 </div>
                 <h3 className="text-2xl lg:text-3xl font-bold mb-4">Studio Address</h3>
                 <address className="text-zinc-300 text-lg lg:text-xl not-italic leading-relaxed">
-                  Our training facility and office are located in the heart of Lahore, 
+                  Our training facility and office are located in the heart of Lahore,
                   Pakistan's cultural capital. We welcome visitors by appointment.
                 </address>
               </div>
@@ -413,7 +412,7 @@ export default function ContactPage() {
           </div>
         </section>
       </main>
-      
+
       <Footer />
     </div>
   );

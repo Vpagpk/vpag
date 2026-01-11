@@ -3,6 +3,7 @@ import Footer from '@/components/sections/footer';
 import Breadcrumbs from '@/components/ui/breadcrumbs';
 import AwardsSection from '@/components/sections/awards';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Sparkles, Trophy, Globe, GraduationCap, Target, Eye } from 'lucide-react';
 
 export const metadata = {
@@ -20,7 +21,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-zinc-950">
       <Navigation />
-      
+
       <main className="pt-24">
         {/* Hero Section */}
         <section className="relative py-20 overflow-hidden">
@@ -127,7 +128,7 @@ export default function AboutPage() {
               {/* Decorative Elements */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" aria-hidden="true" />
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" aria-hidden="true" />
-              
+
               <div className="relative grid md:grid-cols-3 gap-12 lg:gap-16">
                 {[
                   { number: '22+', label: 'Years Excellence' },
@@ -169,7 +170,7 @@ export default function AboutPage() {
                 <div className="absolute top-8 right-8 opacity-5 group-hover:opacity-10 transition-opacity duration-500">
                   <Target className="w-32 h-32 text-primary" aria-hidden="true" />
                 </div>
-                
+
                 <div className="relative z-10">
                   <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 border border-primary/30 mb-6 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
                     <Target className="w-8 h-8 text-primary" aria-hidden="true" />
@@ -188,7 +189,7 @@ export default function AboutPage() {
                 <div className="absolute top-8 right-8 opacity-5 group-hover:opacity-10 transition-opacity duration-500">
                   <Eye className="w-32 h-32 text-primary" aria-hidden="true" />
                 </div>
-                
+
                 <div className="relative z-10">
                   <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 border border-primary/30 mb-6 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
                     <Eye className="w-8 h-8 text-primary" aria-hidden="true" />
@@ -205,7 +206,7 @@ export default function AboutPage() {
           </div>
         </section>
       </main>
-      
+
       <Footer />
     </div>
   );

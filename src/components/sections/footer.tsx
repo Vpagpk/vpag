@@ -8,7 +8,10 @@ import {
   Youtube,
   Twitter,
 } from "lucide-react";
+import Link from "next/link";
 import NewsletterSignup from "@/components/ui/newsletter-signup";
+
+import { siteConfig } from '@/lib/config';
 
 const Footer = () => {
   return (
@@ -23,7 +26,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Column 1: About */}
           <div className="space-y-3 pr-0 lg:pr-8 animate-fade-in">
-            <a href="/" className="mb-3 inline-block group" aria-label="VPAG Home">
+            <Link href="/" className="mb-3 inline-block group" aria-label="VPAG Home">
               <div className="relative">
                 <div className="absolute inset-0 bg-primary/20 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
                 <Image
@@ -34,14 +37,14 @@ const Footer = () => {
                   className="relative object-contain transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12 will-change-transform"
                 />
               </div>
-            </a>
+            </Link>
             <h3 className="font-semibold text-base text-white">
               VPAG - Versatile Performing Art Group
             </h3>
             <p className="text-sm leading-relaxed text-zinc-400 hover:text-zinc-300 transition-colors duration-300">
               Preserving Pakistani cultural heritage through authentic dance
               performances, training programs, and artistic excellence for over
-              22 years.
+              {siteConfig.stats.years} years.
             </p>
           </div>
 
@@ -51,13 +54,13 @@ const Footer = () => {
               Quick Links
             </h4>
             <ul className="space-y-2.5">
-              <li className="group"><a href="/" className="text-zinc-400 text-sm hover:text-primary hover:translate-x-1 inline-block transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm">Home</a></li>
-              <li className="group"><a href="/about" className="text-zinc-400 text-sm hover:text-primary hover:translate-x-1 inline-block transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm">About Us</a></li>
-              <li className="group"><a href="/services" className="text-zinc-400 text-sm hover:text-primary hover:translate-x-1 inline-block transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm">Services</a></li>
-              <li className="group"><a href="/gallery" className="text-zinc-400 text-sm hover:text-primary hover:translate-x-1 inline-block transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm">Gallery</a></li>
-              <li className="group"><a href="/faq" className="text-zinc-400 text-sm hover:text-primary hover:translate-x-1 inline-block transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm">FAQ</a></li>
-              <li className="group"><a href="/blog" className="text-zinc-400 text-sm hover:text-primary hover:translate-x-1 inline-block transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm">Blog</a></li>
-              <li className="group"><a href="/contact" className="text-zinc-400 text-sm hover:text-primary hover:translate-x-1 inline-block transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm">Contact</a></li>
+              <li className="group"><Link href="/" className="text-zinc-400 text-sm hover:text-primary hover:translate-x-1 inline-block transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm">Home</Link></li>
+              <li className="group"><Link href="/about" className="text-zinc-400 text-sm hover:text-primary hover:translate-x-1 inline-block transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm">About Us</Link></li>
+              <li className="group"><Link href="/services" className="text-zinc-400 text-sm hover:text-primary hover:translate-x-1 inline-block transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm">Services</Link></li>
+              <li className="group"><Link href="/gallery" className="text-zinc-400 text-sm hover:text-primary hover:translate-x-1 inline-block transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm">Gallery</Link></li>
+              <li className="group"><Link href="/faq" className="text-zinc-400 text-sm hover:text-primary hover:translate-x-1 inline-block transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm">FAQ</Link></li>
+              <li className="group"><Link href="/blog" className="text-zinc-400 text-sm hover:text-primary hover:translate-x-1 inline-block transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm">Blog</Link></li>
+              <li className="group"><Link href="/contact" className="text-zinc-400 text-sm hover:text-primary hover:translate-x-1 inline-block transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm">Contact</Link></li>
             </ul>
           </div>
 
@@ -73,32 +76,32 @@ const Footer = () => {
               </li>
               <li className="flex items-start gap-2.5 group">
                 <Phone className="h-4 w-4 text-primary mt-1 shrink-0 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" aria-hidden="true" />
-                <a href="tel:+923009402878" className="text-sm hover:text-primary transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm">
-                  +92 300 9402878
-                </a>
+                <Link href={siteConfig.phoneHref} className="text-sm hover:text-primary transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm">
+                  {siteConfig.phone}
+                </Link>
               </li>
               <li className="flex items-start gap-2.5 group">
                 <Mail className="h-4 w-4 text-primary mt-1 shrink-0 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
-                <a href="mailto:info@vpag.pk" className="text-sm hover:text-primary transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm">
-                  info@vpag.pk
-                </a>
+                <Link href={`mailto:${siteConfig.email}`} className="text-sm hover:text-primary transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm">
+                  {siteConfig.email}
+                </Link>
               </li>
             </ul>
 
             <h5 className="mb-3 font-bold text-sm text-white">Follow Us</h5>
             <div className="flex items-center space-x-2.5 mb-4">
-              <a href="https://facebook.com/vpagdance" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Facebook" className="relative w-9 h-9 rounded-full bg-zinc-800 hover:bg-primary text-white hover:text-black flex items-center justify-center transition-all duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black group hover:scale-110 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/50 will-change-transform">
+              <Link href={siteConfig.socials.facebook} target="_blank" rel="noopener noreferrer" aria-label="Follow us on Facebook" className="relative w-9 h-9 rounded-full bg-zinc-800 hover:bg-primary text-white hover:text-black flex items-center justify-center transition-all duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black group hover:scale-110 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/50 will-change-transform">
                 <Facebook className="h-4 w-4 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
-              </a>
-              <a href="https://instagram.com/vpagdance" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram" className="relative w-9 h-9 rounded-full bg-zinc-800 hover:bg-primary text-white hover:text-black flex items-center justify-center transition-all duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black group hover:scale-110 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/50 will-change-transform">
+              </Link>
+              <Link href={siteConfig.socials.instagram} target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram" className="relative w-9 h-9 rounded-full bg-zinc-800 hover:bg-primary text-white hover:text-black flex items-center justify-center transition-all duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black group hover:scale-110 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/50 will-change-transform">
                 <Instagram className="h-4 w-4 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
-              </a>
-              <a href="https://youtube.com/@vpagdancecompany" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to our YouTube channel" className="relative w-9 h-9 rounded-full bg-zinc-800 hover:bg-primary text-white hover:text-black flex items-center justify-center transition-all duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black group hover:scale-110 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/50 will-change-transform">
+              </Link>
+              <Link href={siteConfig.socials.youtube} target="_blank" rel="noopener noreferrer" aria-label="Subscribe to our YouTube channel" className="relative w-9 h-9 rounded-full bg-zinc-800 hover:bg-primary text-white hover:text-black flex items-center justify-center transition-all duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black group hover:scale-110 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/50 will-change-transform">
                 <Youtube className="h-4 w-4 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
-              </a>
-              <a href="https://twitter.com/vpagdance" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Twitter" className="relative w-9 h-9 rounded-full bg-zinc-800 hover:bg-primary text-white hover:text-black flex items-center justify-center transition-all duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black group hover:scale-110 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/50 will-change-transform">
+              </Link>
+              <Link href={siteConfig.socials.twitter} target="_blank" rel="noopener noreferrer" aria-label="Follow us on Twitter" className="relative w-9 h-9 rounded-full bg-zinc-800 hover:bg-primary text-white hover:text-black flex items-center justify-center transition-all duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black group hover:scale-110 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/50 will-change-transform">
                 <Twitter className="h-4 w-4 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -114,16 +117,16 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Bottom Bar */}
       <div className="border-t border-zinc-800/50 relative z-10">
         <div className="container flex flex-col items-center justify-between gap-3 py-5 text-sm sm:flex-row">
           <p className="text-center text-zinc-500 text-xs sm:text-left hover:text-zinc-400 transition-colors duration-300">
-            © 2025 VPAG - Versatile Performing Art Group. All rights reserved.
+            © {siteConfig.copyrightYear} VPAG - Versatile Performing Art Group. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <a href="/privacy" className="text-zinc-400 text-xs hover:text-primary hover:translate-x-1 inline-block transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm">Privacy Policy</a>
-            <a href="/terms" className="text-zinc-400 text-xs hover:text-primary hover:translate-x-1 inline-block transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm">Terms of Service</a>
+            <Link href="/privacy" className="text-zinc-400 text-xs hover:text-primary hover:translate-x-1 inline-block transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm">Privacy Policy</Link>
+            <Link href="/terms" className="text-zinc-400 text-xs hover:text-primary hover:translate-x-1 inline-block transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded-sm">Terms of Service</Link>
           </div>
         </div>
       </div>

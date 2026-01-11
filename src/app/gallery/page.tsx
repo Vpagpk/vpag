@@ -3,6 +3,7 @@ import Footer from '@/components/sections/footer';
 import Breadcrumbs from '@/components/ui/breadcrumbs';
 import VideoGallery from '@/components/sections/video-gallery';
 import Image from 'next/image';
+import { SmartImage } from '@/components/ui/smart-image';
 import { Image as ImageIcon, Video, Loader2 } from 'lucide-react';
 
 // Force dynamic rendering to prevent build timeout
@@ -109,7 +110,7 @@ export default async function GalleryPage() {
                     key={photo.id}
                     className="relative aspect-[4/3] rounded-2xl overflow-hidden group cursor-pointer border border-zinc-800 hover:border-primary/50 transition-all duration-500"
                   >
-                    <Image
+                    <SmartImage
                       src={photo.imageUrl}
                       alt={photo.title}
                       fill
