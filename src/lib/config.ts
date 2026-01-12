@@ -1,6 +1,7 @@
 export const siteConfig = {
     phone: "+92 300 9402878",
     phoneHref: "tel:+923009402878",
+    whatsapp: "923009402878", // WhatsApp number format: country code + number without +
     email: "info@vpag.pk",
     yearEstablished: 2002, // Derived from 22+ years as of 2025/2026
     copyrightYear: 2026,

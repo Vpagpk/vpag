@@ -4,9 +4,6 @@ import path from "node:path";
 const LOADER = path.resolve(__dirname, 'src/visual-edits/component-tagger-loader.js');
 
 const nextConfig: NextConfig = {
-  // Optimize for Vercel deployment
-  output: 'standalone',
-
   async headers() {
     return [
       {
