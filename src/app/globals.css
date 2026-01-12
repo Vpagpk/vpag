@@ -23,7 +23,7 @@
 /* Updated: 2025-10-08T07:48:03.922Z */
 /* Updated: 2025-10-08T07:46:09.827Z */
 /* Updated: 2025-10-07T17:24:31.666Z */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+/* Font is now loaded via next/font in layout.tsx for optimal performance */
 
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -40,7 +40,8 @@
   --color-popover: #0a0a0a;
   --color-popover-foreground: #ffffff;
 
-  --color-primary: #f59e0b; /* Accent Gold/Yellow */
+  --color-primary: #f59e0b;
+  /* Accent Gold/Yellow */
   --color-primary-foreground: #000000;
 
   --color-secondary: #1a1a1a;
@@ -89,9 +90,9 @@
   --color-blue-accent: #3b82f6;
   --color-blue-dark: #2563eb;
 
-  /* Typography */
-  --font-display: "Inter", sans-serif;
-  --font-body: "Inter", sans-serif;
+  /* Typography - Using next/font CSS variable */
+  --font-display: var(--font-inter, "Inter", system-ui, sans-serif);
+  --font-body: var(--font-inter, "Inter", system-ui, sans-serif);
 
   /* Shadcn/UI Radii */
   --radius-lg: 0.75rem;
@@ -106,14 +107,17 @@
     from {
       height: 0;
     }
+
     to {
       height: var(--radix-accordion-content-height);
     }
   }
+
   @keyframes accordion-up {
     from {
       height: var(--radix-accordion-content-height);
     }
+
     to {
       height: 0;
     }
@@ -126,6 +130,7 @@
   looks the same as it did with Tailwind CSS v3.
 */
 @layer base {
+
   *,
   ::after,
   ::before,
@@ -189,7 +194,12 @@
     text-rendering: optimizeLegibility;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-display);
     color: var(--color-text-primary);
     line-height: 1.2;
@@ -245,21 +255,25 @@
       max-width: 640px;
     }
   }
+
   @media (min-width: 768px) {
     .container {
       max-width: 768px;
     }
   }
+
   @media (min-width: 1024px) {
     .container {
       max-width: 1024px;
     }
   }
+
   @media (min-width: 1280px) {
     .container {
       max-width: 1280px;
     }
   }
+
   @media (min-width: 1440px) {
     .container {
       max-width: 1440px;
@@ -268,27 +282,36 @@
 
   /* Enhanced Custom Animations with GPU Acceleration */
   @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translate3d(0, 0, 0);
     }
+
     50% {
       transform: translate3d(0, -20px, 0);
     }
   }
 
   @keyframes float-delayed {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translate3d(0, 0, 0);
     }
+
     50% {
       transform: translate3d(0, -30px, 0);
     }
   }
 
   @keyframes slow-zoom {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: scale3d(1, 1, 1);
     }
+
     50% {
       transform: scale3d(1.1, 1.1, 1);
     }
@@ -299,6 +322,7 @@
       transform: translate3d(0, 0, 0);
       opacity: 1;
     }
+
     100% {
       transform: translate3d(0, 12px, 0);
       opacity: 0;
@@ -306,9 +330,12 @@
   }
 
   @keyframes pulse-subtle {
-    0%, 100% {
+
+    0%,
+    100% {
       opacity: 1;
     }
+
     50% {
       opacity: 0.8;
     }
@@ -319,6 +346,7 @@
       opacity: 0;
       transform: translate3d(0, 0, 0);
     }
+
     to {
       opacity: 1;
       transform: translate3d(0, 0, 0);
@@ -330,6 +358,7 @@
       opacity: 0;
       transform: translate3d(0, 30px, 0);
     }
+
     to {
       opacity: 1;
       transform: translate3d(0, 0, 0);
@@ -340,15 +369,19 @@
     0% {
       background-position: -200% center;
     }
+
     100% {
       background-position: 200% center;
     }
   }
 
   @keyframes glow-pulse {
-    0%, 100% {
+
+    0%,
+    100% {
       box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
     }
+
     50% {
       box-shadow: 0 0 40px rgba(245, 158, 11, 0.6);
     }
@@ -454,12 +487,15 @@
   }
 
   /* Smooth transitions for interactive elements */
-  button, a, [role="button"] {
+  button,
+  a,
+  [role="button"] {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   /* Reduce motion for users who prefer it */
   @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {

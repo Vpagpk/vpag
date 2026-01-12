@@ -1,13 +1,33 @@
+import dynamic from 'next/dynamic';
 import Navigation from '@/components/sections/navigation';
 import HeroSection from '@/components/sections/hero';
-import AboutPreview from '@/components/sections/about-preview';
-import ServicesPreview from '@/components/sections/services-preview';
-import TestimonialsSection from '@/components/sections/testimonials';
-import PartnersSection from '@/components/sections/partners';
-import LocationSection from '@/components/sections/location';
-import CtaSection from '@/components/sections/cta';
-import Footer from '@/components/sections/footer';
-import { WhatsAppPopup } from '@/components/ui/whatsapp-popup';
+
+// Lazy load below-the-fold sections for faster initial page load
+const AboutPreview = dynamic(() => import('@/components/sections/about-preview'), {
+  loading: () => <div className="min-h-[400px] bg-background" />,
+});
+const ServicesPreview = dynamic(() => import('@/components/sections/services-preview'), {
+  loading: () => <div className="min-h-[400px] bg-background" />,
+});
+const TestimonialsSection = dynamic(() => import('@/components/sections/testimonials'), {
+  loading: () => <div className="min-h-[300px] bg-background" />,
+});
+const PartnersSection = dynamic(() => import('@/components/sections/partners'), {
+  loading: () => <div className="min-h-[200px] bg-background" />,
+});
+const LocationSection = dynamic(() => import('@/components/sections/location'), {
+  loading: () => <div className="min-h-[400px] bg-background" />,
+});
+const CtaSection = dynamic(() => import('@/components/sections/cta'), {
+  loading: () => <div className="min-h-[200px] bg-background" />,
+});
+const Footer = dynamic(() => import('@/components/sections/footer'), {
+  loading: () => <div className="min-h-[300px] bg-background" />,
+});
+const WhatsAppPopup = dynamic(
+  () => import('@/components/ui/whatsapp-popup').then(mod => ({ default: mod.WhatsAppPopup })),
+  { ssr: false }
+);
 
 export const metadata = {
   title: 'VPAG - Premier Pakistani Cultural Dance Company | Authentic Sufi & Folk Performances',
@@ -25,7 +45,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       <main className="relative">
         <HeroSection />
         <AboutPreview />
@@ -35,7 +55,7 @@ export default function HomePage() {
         <LocationSection />
         <CtaSection />
       </main>
-      
+
       <Footer />
       <WhatsAppPopup />
     </div>
